@@ -34,6 +34,9 @@ end
 if length(opts.truncate) ~= (opts.ensemble_size+1)
   error('opts.truncate must be of length opts.ensemble_size+1.')
 end
+if ~isfield(opts, 'anneal')
+  opts.anneal = 1;
+end
 
 [T, opts.n_features] = size(data);
 
@@ -100,6 +103,7 @@ for t = 1:T-1
   if (sign(opts.models(:, end)'*data_te(t, :)')*labels_te(t)) < 0 
     mistakes(t, end) = 1;  
   end
+  opts.epsilon = opts.epsilon*opts.anneal^t;
   
 end
 
