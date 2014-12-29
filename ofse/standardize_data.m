@@ -1,11 +1,10 @@
 function [Y,X] = standardize_data(data)
 %standardizeData Standardizes data for pre-processing
 
-[n,d] = size(data);               %n=rows, d=columns
-Y = data(1:n,1);                        %Y = all data in first col
-X = data(1:n,2:d);                      %X = all data except for the first col
+[n,d] = size(data); % n=rows, d=columns
+Y = data(1:n,1);    % Y = all data in first col
+X = data(1:n,2:d);  % X = all data except for the first col
 
-%What is this doing? %conditioning data somehow
 stdX = std(X);                            %stdX = standard deviation of X
 idx1 = stdX~=0;                           %idx1 persists where the std X is not zero
 centrX = X-repmat(mean(X),size(X,1),1);   %Subtracts a tiling from X
