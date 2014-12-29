@@ -2,6 +2,8 @@ clc;
 clear; 
 close all; 
 
+addpath('ofse/');
+
 datasets = {'a8a', 'german', 'magic04', 'spambase', 'splice', 'svmguide3', 'sido0'};
 
 opts.lambda = 1;
@@ -27,6 +29,7 @@ delete(gcp('nocreate'));
 parpool(25);
 
 for nd = 1:length(datasets) 
+  load(['data/',datasets{nd},'.mat'])
   [labels,data] = standardize_data(data);
   [mistakes_oba{nd}, timerz_oba{nd}] = ofs_bagging_avg(data, labels, opts);
   [mistakes_obo{nd}, timerz_obo{nd}] = ofs_boosting_avg(data, labels, opts);
