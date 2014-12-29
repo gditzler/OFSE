@@ -29,11 +29,17 @@ delete(gcp('nocreate'));
 parpool(25);
 
 for nd = 1:length(datasets) 
+  disp(['Running: ', datasets{nd}]);
   load(['data/',datasets{nd},'.mat'])
   [labels,data] = standardize_data(data);
+
+  disp('  > OFSE-Bag');
   [mistakes_oba{nd}, timerz_oba{nd}] = ofs_bagging_avg(data, labels, opts);
+  disp('  > OFSE-Boo');
   [mistakes_obo{nd}, timerz_obo{nd}] = ofs_boosting_avg(data, labels, opts);
+  disp('  > OFSE-Bag-R');
   [mistakes_rba{nd}, timerz_rba{nd}] = ofs_bagging_randtrunc_avg(data, labels, opts);
+  disp('  > OFSE-Boo-R');
   [mistakes_rbo{nd}, timerz_rbo{nd}] = ofs_boosting_randtrunc_avg(data, labels, opts);
 end
 save('mat/mistakes_experiment.mat');
