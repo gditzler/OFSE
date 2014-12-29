@@ -27,8 +27,11 @@ end
 if ~isfield(opts, 'verbose')
   opts.verbose = 0;
 end
-if numel(opts.truncate) == 1
+if length(opts.truncate) == 1
   opts.truncate = opts.truncate*ones(1, opts.ensemble_size+1);
+end
+if length(opts.truncate) ~= (opts.ensemble_size+1)
+  error('opts.truncate must be of length opts.ensemble_size+1.')
 end
 
 [T, opts.n_features] = size(data);
