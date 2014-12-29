@@ -27,7 +27,7 @@ end
 if ~isfield(opts, 'verbose')
   opts.verbose = 0;
 end
-if size(opts.truncate) == 1
+if numel(opts.truncate) == 1
   opts.truncate = opts.truncate*ones(1, opts.ensemble_size+1);
 end
 
