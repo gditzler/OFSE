@@ -13,3 +13,6 @@ X(:,idx1) = centrX(:,idx1)./repmat(stdX(:,idx1),size(X,1),1); %$X at the specifi
 X = (X-repmat(mean(X),size(X,1),1))./repmat(std(X),size(X,1),1); %Overwrite X as current X-tiled mean
 X = X./repmat(sqrt(sum(X.*X,2)),1, size(X,2));    %Overwrite X as x X divided by tiled sqrt(sum of X.*X,2)
 
+i = randperm(numel(Y));
+Y = Y(i);
+X = X(i, :);
