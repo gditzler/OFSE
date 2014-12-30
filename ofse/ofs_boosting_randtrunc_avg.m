@@ -23,5 +23,5 @@ mistakes = mistakes/opts.avg;
 timerz = timerz/opts.avg;
 
 
-function set_opts(opts, K)
+function opts = set_opts(opts, K)
 opts.truncate = poissrnd(floor(opts.frac*K), 1, opts.ensemble_size+1);
