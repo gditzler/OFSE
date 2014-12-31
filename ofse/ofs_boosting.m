@@ -70,7 +70,7 @@ for t = 1:T-1
   for k = 1:opts.ensemble_size
     
     % perform the online bagging update the to `k`th ensmeble member 
-    lambda_k = poissrnd(opts.lambda);
+    lambda_k = poissrnd(lambda_t);
     for j = 1:lambda_k
       opts.models(:,k) = update_ofs(data_tr(t, :), labels_tr(t), opts, k);
     end

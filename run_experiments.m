@@ -1,6 +1,8 @@
 %% run_experiments.m
 %  Experiments Implemented
-%   1) cumulative mistakes & timing on real-world datasets
+%   1) cumulative mistakes & timing on real-world datasets without
+%   annealing
+%   2) cumulative mistakes & timing on real-world datasets with annealing
 %% No Annealing
 % Evaluate the OFS ensemble (OFSE) based approaches on several real-world
 % data sets. There are four different variations that we are experimenting
