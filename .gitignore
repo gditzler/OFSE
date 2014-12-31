@@ -1,5 +1,5 @@
 # stuff to ignore
 *.swp
 *.m~
-
-
+eps/
+pdf/
