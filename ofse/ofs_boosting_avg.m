@@ -1,5 +1,13 @@
 function [mistakes, timerz] = ofs_boosting_avg(data, labels, opts)
-
+% OFS_BOOSTING_AVG Call OFS_BOOSTING multiple time using different
+% permutations of the sequence in the data. opts.avg must be set. 
+% 
+%  [mistakes, timerz] = OFS_BOOSTING_AVG(data, labels, opts)
+% 
+% See also OFS_BOOSTING
+if ~isfield(opts, 'avg')
+  error('opts.avg must be set');
+end
 
 mistakes_c= cell(1, opts.avg);
 timerz_c = cell(1, opts.avg);

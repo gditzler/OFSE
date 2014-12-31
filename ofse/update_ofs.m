@@ -1,5 +1,15 @@
 function weights = update_ofs(x_t, y_t, opts, idx)
-
+% UPDATE_OFS Perform a single instance OFS update to parameters
+% 
+%  weights = UPDATE_OFS(x_t, y_t, opts, idx)
+% 
+%  @x_t: feature vector
+%  @y_t: training label (+/-1)
+%  @opts: option structure (see OFS_BAGGING or OFS_BOOSTING)
+%  @idx: integer pointing to the ensemble member in opt that needs to be
+%  updated with the new training sample
+%
+% See also OFS_BAGGING, OFS_BOOSTING
 if random('Binomial', 1, opts.epsilon) == 1,
   perm_t = randperm(size(opts.models(:, idx), 1));
   c_t = perm_t(1:opts.truncate(idx)-1);

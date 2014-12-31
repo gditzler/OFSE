@@ -1,6 +1,19 @@
 function [mistakes, timerz] = ofs_boosting_randtrunc_avg(data, labels, opts)
+% OFS_BOOSTING_RANDTRUNC_AVG Call OFS_BOOSTING multiple time using different
+% permutations of the sequence in the data. Furthermore, the size of
+% l0-norm for each of the ensemble members is sampled from a Poisson
+% distrtibution. The opts.avg and opts.frac fields must be set. 
+% 
+%  [mistakes, timerz] = OFS_BOOSTING_RANDTRUNC_AVG(data, labels, opts)
+% 
+% See also OFS_BOOSTING
 
-
+if ~isfield(opts, 'avg')
+  error('opts.avg must be set');
+end
+if ~isfield(opts, 'frac')
+  error('opts.frac must be set');
+end
 mistakes_c= cell(1, opts.avg);
 timerz_c = cell(1, opts.avg);
 parfor k = 1:opts.avg 

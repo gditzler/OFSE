@@ -1,5 +1,10 @@
 function [Y,X] = standardize_data(data)
-%standardizeData Standardizes data for pre-processing
+% STANDARDIZE_DATS Standardizes data for pre-processing
+%
+% [Y,X] = standardize_data(data)
+%  
+% Y = data(1:n,1);    % Y = all data in first col
+% X = data(1:n,2:d);  % X = all data except for the first col
 
 [n,d] = size(data); % n=rows, d=columns
 Y = data(1:n,1);    % Y = all data in first col

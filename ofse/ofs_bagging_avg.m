@@ -1,6 +1,14 @@
 function [mistakes, timerz] = ofs_bagging_avg(data, labels, opts)
-
-
+% OFS_BAGGING_AVG Call OFS_BAGGING multiple time using different
+% permutations of the sequence in the data. opt.avg field must be set to
+% use this function
+% 
+%  [mistakes, timerz] = OFS_BAGGING_AVG(data, labels, opts)
+% 
+% See also OFS_BAGGING
+if ~isfield(opts, 'avg')
+  error('opts.avg must be set');
+end
 mistakes_c= cell(1, opts.avg);
 timerz_c = cell(1, opts.avg);
 parfor k = 1:opts.avg 

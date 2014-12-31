@@ -1,12 +1,20 @@
 function [mistakes, timerz] = ofs_bagging(data, labels, opts)
-
-% opts.lambda
-% opts.ensemble_size: required
-% opts.epsilon: search term
-% opts.eta: learning rate
-% opts.R
-% opts.truncate
-% opts.verbose
+% OFS_BAGGING Online Bagging using Online Feature Selection 
+%
+%  [mistakes, timerz] = OFS_BAGGING(data, labels, opts)
+%
+%  @data: feature vectors (observations by features)
+%  @labels: class labels (+/-1)
+%  @opt: options structure
+%     @opts.lambda: Poisson parameter for bagging
+%     @opts.ensemble_size: ensemble size (required)
+%     @opts.epsilon: search term
+%     @opts.eta: learning rate
+%     @opts.R: max l2-norm
+%     @opts.truncate: l0-norm (required)
+%     @opts.verbose: print evaulation round (mod(t,1000)==0)
+%
+%  See also OFS_BOOSTING, OFS_BAGGING_AVG, OFS_BAGGING_RANDTRUC_AVG
 
 % perform some error checking 
 if ~isfield(opts, 'ensemble_size')

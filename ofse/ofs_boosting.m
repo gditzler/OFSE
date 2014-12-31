@@ -1,13 +1,20 @@
 function [mistakes, timerz] = ofs_boosting(data, labels, opts)
+% OFS_BOOSTING Online Boosting using Online Feature Selection 
+%
+%  [mistakes, timerz] = OFS_BOOSTING(data, labels, opts)
+%
+%  @data: feature vectors (observations by features)
+%  @labels: class labels (+/-1)
+%  @opt: options structure
+%     @opts.ensemble_size: ensemble size (required)
+%     @opts.epsilon: search term
+%     @opts.eta: learning rate
+%     @opts.R: max l2-norm
+%     @opts.truncate: l0-norm (required)
+%     @opts.verbose: print evaulation round (mod(t,1000)==0)
+%
+%  See also OFS_BAGGING, OFS_BOOSTING_AVG, OFS_BOOSTING_RANDTRUC_AVG
 
-
-% opts.lambda
-% opts.ensemble_size: required
-% opts.epsilon: search term
-% opts.eta: learning rate
-% opts.R
-% opts.truncate
-% opts.verbose
 
 % perform some error checking 
 if ~isfield(opts, 'ensemble_size')
@@ -21,9 +28,6 @@ if ~isfield(opts, 'epsilon')
 end
 if ~isfield(opts, 'eta')
   opts.eta = .1;
-end
-if ~isfield(opts, 'lambda')
-  opts.lamba = 1;
 end
 if ~isfield(opts, 'verbose')
   opts.verbose = 0;
@@ -61,11 +65,11 @@ lambda_sw = zeros(opts.ensemble_size, 1);
 tic;
 for t = 1:T-1
   
-  if opts.verbose
-    if mod(t, 1000) == 0
-      disp(['Timestep ', num2str(t), ' of ', num2str(T-1)]);
+    if opts.verbose
+      if mod(t, 1000) == 0
+        disp(['Timestep ', num2str(t), ' of ', num2str(T-1)]);
+      end
     end
-  end
   
   for k = 1:opts.ensemble_size
     
