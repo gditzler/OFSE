@@ -58,19 +58,19 @@ for i = 1:opts.ensemble_size
   opts.models(:, i) = truncate(opts.models(:, i), opts.truncate(i));
 end
 
-lambda_t = 1;
 lambda_sc = zeros(opts.ensemble_size, 1);
 lambda_sw = zeros(opts.ensemble_size, 1);
 
 tic;
 for t = 1:T-1
   
-    if opts.verbose
-      if mod(t, 1000) == 0
-        disp(['Timestep ', num2str(t), ' of ', num2str(T-1)]);
-      end
+  if opts.verbose
+    if mod(t, 1000) == 0
+      disp(['Timestep ', num2str(t), ' of ', num2str(T-1)]);
     end
+  end
   
+  lambda_t = 1;  % set current instance weight 
   for k = 1:opts.ensemble_size
     
     % perform the online bagging update the to `k`th ensmeble member 
