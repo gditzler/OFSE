@@ -14,8 +14,11 @@ close all;
 addpath('ofse/');
 
 datasets = {'a8a', 'german', 'magic04', 'spambase', 'splice', 'svmguide3', ...
-  'sido0', 'uni_S10000F500R25', 'uni_S10000F500R50', 'uni_S10000F500R100', ...
-  'uni_S10000F500R150', 'uni_S10000F500R200'};
+  'sido0', 'ionosphere', 'ovariancancer'};
+% datasets = {'a8a', 'german', 'magic04', 'spambase', 'splice', 'svmguide3', ...
+%   'sido0', 'uni_S10000F500R25', 'uni_S10000F500R50', 'uni_S10000F500R100', ...
+%   'uni_S10000F500R150', 'uni_S10000F500R200'};
+
 
 opts.lambda = 1;          % bagging parameter
 opts.ensemble_size = 25;  % number of ofs classifiers
@@ -43,7 +46,19 @@ parpool(25);
 for nd = 1:length(datasets) 
   disp(['Running: ', datasets{nd}]);
   
-  load(['data/',datasets{nd},'.mat'])
+  if strcmp(datasets{nd}, 'ionosphere')
+    load ionosphere
+    [~,~,y] = unique(Y);
+    y(y==2) = -1;
+    data = [y X];
+  elseif strcmp(datasets{nd}, 'ionosphere')
+    load ovariancancer
+    [~,~,y] = unique(grp);
+    y(y==2) = -1;
+    data = [y  obs];
+  else
+    load(['data/',datasets{nd},'.mat'])
+  end
   [labels,data] = standardize_data(data);
   
   opts.truncate = floor(size(data,2)*opts.frac);
@@ -74,8 +89,10 @@ close all;
 addpath('ofse/');
 
 datasets = {'a8a', 'german', 'magic04', 'spambase', 'splice', 'svmguide3', ...
-  'sido0', 'uni_S10000F500R25', 'uni_S10000F500R50', 'uni_S10000F500R100', ...
-  'uni_S10000F500R150', 'uni_S10000F500R200'};
+  'sido0', 'ionosphere', 'ovariancancer'};
+% datasets = {'a8a', 'german', 'magic04', 'spambase', 'splice', 'svmguide3', ...
+%   'sido0', 'uni_S10000F500R25', 'uni_S10000F500R50', 'uni_S10000F500R100', ...
+%   'uni_S10000F500R150', 'uni_S10000F500R200'};
 
 opts.lambda = 1;          % bagging parameter
 opts.ensemble_size = 25;  % number of ofs classifiers
@@ -103,7 +120,20 @@ parpool(25);
 for nd = 1:length(datasets) 
   disp(['Running: ', datasets{nd}]);
   
-  load(['data/',datasets{nd},'.mat'])
+  if strcmp(datasets{nd}, 'ionosphere')
+    load ionosphere
+    [~,~,y] = unique(Y);
+    y(y==2) = -1;
+    data = [y X];
+  elseif strcmp(datasets{nd}, 'ionosphere')
+    load ovariancancer
+    [~,~,y] = unique(grp);
+    y(y==2) = -1;
+    data = [y  obs];
+  else
+    load(['data/',datasets{nd},'.mat'])
+  end
+  
   [labels,data] = standardize_data(data);
   
   opts.truncate = floor(size(data,2)*opts.frac);
