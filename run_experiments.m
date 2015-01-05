@@ -51,7 +51,7 @@ for nd = 1:length(datasets)
     [~,~,y] = unique(Y);
     y(y==2) = -1;
     data = [y X];
-  elseif strcmp(datasets{nd}, 'ionosphere')
+  elseif strcmp(datasets{nd}, 'ovariancancer')
     load ovariancancer
     [~,~,y] = unique(grp);
     y(y==2) = -1;
@@ -125,7 +125,7 @@ for nd = 1:length(datasets)
     [~,~,y] = unique(Y);
     y(y==2) = -1;
     data = [y X];
-  elseif strcmp(datasets{nd}, 'ionosphere')
+  elseif strcmp(datasets{nd}, 'ovariancancer')
     load ovariancancer
     [~,~,y] = unique(grp);
     y(y==2) = -1;
