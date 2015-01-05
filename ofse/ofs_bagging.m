@@ -35,6 +35,9 @@ end
 if ~isfield(opts, 'verbose')
   opts.verbose = 0;
 end
+if ~isfield(opts, 'partial_test')
+  opts.partial_test = 0;
+end
 if length(opts.truncate) == 1
   opts.truncate = opts.truncate*ones(1, opts.ensemble_size+1);
 end
@@ -79,17 +82,36 @@ for t = 1:T-1
     
     % predict the output of the `k`th ensmeble member on the testing
     % sequence and update the mistakes if needed. 
-    if (sign(opts.models(:,k)'*data_te(t, :)')*labels_te(t)) < 0
-      mistakes(t, k) = 1;
-    end  
+    if opts.partial_test
+      mask = zeros(1, opts.n_features);
+      q = randperm(opts.n_features);
+      mask(q(1:opts.truncate(k))) = 1;
+      if (sign(opts.models(:,k)'*(data_te(t, :).*mask)')*labels_te(t)) < 0
+        mistakes(t, k) = 1;
+      end
+    else
+      if (sign(opts.models(:,k)'*data_te(t, :)')*labels_te(t)) < 0
+        mistakes(t, k) = 1;
+      end 
+    end
 
   end
   
   % for bagging, average the ensemble models then perform the truncation
   % step, and update the number of mistakes made by the ensemble.
   opts.models(:, end) = truncate(mean(opts.models(:, 1:end-1),2), opts.truncate(end));
-  if (sign(opts.models(:, end)'*data_te(t, :)')*labels_te(t)) < 0 
-    mistakes(t, end) = 1;  
+  
+  if opts.partial_test
+    mask = zeros(1, opts.n_features);
+    q = randperm(opts.n_features);
+    mask(q(1:opts.truncate(k))) = 1;
+    if (sign(opts.models(:, end)'*(data_te(t, :).*mask)')*labels_te(t)) < 0 
+      mistakes(t, end) = 1;  
+    end
+  else
+    if (sign(opts.models(:, end)'*data_te(t, :)')*labels_te(t)) < 0 
+      mistakes(t, end) = 1;  
+    end
   end
   opts.epsilon = opts.epsilon*opts.anneal^t;
 end
