@@ -26,8 +26,10 @@ f_t = w_t'*xt_t';
 
 % feedback
 if y_t*f_t<=0,
-  xh_t = xt_t/((opts.truncate(idx)/numel(x_t))*opts.epsilon ...
-    + sum(opts.models(find(v_idx==1),idx)~=0)*(1-opts.epsilon));
+  xh_t = xt_t./((opts.truncate(idx)/numel(x_t))*opts.epsilon ...
+    + (opts.models(:, idx)~=0)'*(1 - opts.epsilon));
+  %xt_t/((opts.truncate(idx)/numel(x_t))*opts.epsilon ...
+  %  + sum(opts.models(find(v_idx==1),idx)~=0)*(1-opts.epsilon));
   
   w_temp = w_t + opts.eta*y_t*xh_t';
   w_updates = w_temp*min(1, opts.R/norm(w_temp));
