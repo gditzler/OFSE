@@ -76,6 +76,14 @@ for t = 1:T-1
   lambda_t = 1;  % set current instance weight 
   for k = 1:opts.ensemble_size
     
+    % if we are testing on partial information then we should create a mask
+    % for the features that are available to us
+    if opts.partial_test
+      mask = zeros(1, opts.n_features);
+      q = randperm(opts.n_features);
+      mask(q(1:opts.truncate(end))) = 1;
+    end
+    
     % perform the online bagging update the to `k`th ensmeble member 
     lambda_k = poissrnd(lambda_t);
     for j = 1:lambda_k
@@ -87,9 +95,6 @@ for t = 1:T-1
     
     
     if opts.partial_test
-      mask = zeros(1, opts.n_features);
-      q = randperm(opts.n_features);
-      mask(q(1:opts.truncate(k))) = 1;
       if (sign(opts.models(:,k)'*(data_te(t, :).*mask)')*labels_te(t)) < 0
         mistakes(t, k) = 1;
         lambda_sw(k) = lambda_sw(k) + lambda_t;

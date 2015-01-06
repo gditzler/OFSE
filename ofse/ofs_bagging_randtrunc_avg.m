@@ -37,3 +37,4 @@ timerz = timerz/opts.avg;
 
 function opts = set_opts(opts, K)
 opts.truncate = poissrnd(floor(opts.frac*K), 1, opts.ensemble_size+1);
+opts.truncate(opts.truncate > K) = K;
