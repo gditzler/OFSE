@@ -41,7 +41,7 @@ opts.ensemble_size = 10;
 opts.epsilon = 0.2;
 opts.eta = 0.2;
 opts.R = 10;
-opts.truncate = 25;
+opts.truncate = 10;
 opts.partial_test = 1;
 
 load german
