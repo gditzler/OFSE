@@ -54,6 +54,7 @@ for nd = 1:length(datasets)
     load ionosphere
     [~,~,y] = unique(Y);
     y(y==2) = -1;
+    X(:, 2) = [];
     data = [y X];
   elseif strcmp(datasets{nd}, 'ovariancancer')
     load ovariancancer
@@ -61,7 +62,11 @@ for nd = 1:length(datasets)
     y(y==2) = -1;
     data = [y  obs];
   else
-    load(['data/',datasets{nd},'.mat'])
+    load(['data/', datasets{nd}, '.mat'])
+    X = data(:, 2:end);
+    Y = data(:, 1);
+    X = X(:, std(X)~=0);
+    data = [Y X];
   end
   [labels,data] = standardize_data(data);
   
@@ -128,6 +133,7 @@ for nd = 1:length(datasets)
     load ionosphere
     [~,~,y] = unique(Y);
     y(y==2) = -1;
+    X(:, 2) = [];
     data = [y X];
   elseif strcmp(datasets{nd}, 'ovariancancer')
     load ovariancancer
@@ -136,6 +142,10 @@ for nd = 1:length(datasets)
     data = [y  obs];
   else
     load(['data/',datasets{nd},'.mat'])
+    X = data(:, 2:end);
+    Y = data(:, 1);
+    X = X(:, std(X)~=0);
+    data = [Y X];
   end
   
   [labels,data] = standardize_data(data);
@@ -205,6 +215,7 @@ for nd = 1:length(datasets)
     load ionosphere
     [~,~,y] = unique(Y);
     y(y==2) = -1;
+    X(:, 2) = [];
     data = [y X];
   elseif strcmp(datasets{nd}, 'ovariancancer')
     load ovariancancer
@@ -213,6 +224,10 @@ for nd = 1:length(datasets)
     data = [y  obs];
   else
     load(['data/',datasets{nd},'.mat'])
+    X = data(:, 2:end);
+    Y = data(:, 1);
+    X = X(:, std(X)~=0);
+    data = [Y X];
   end
   [labels,data] = standardize_data(data);
   
@@ -279,6 +294,7 @@ for nd = 1:length(datasets)
     load ionosphere
     [~,~,y] = unique(Y);
     y(y==2) = -1;
+    X(:, 2) = [];
     data = [y X];
   elseif strcmp(datasets{nd}, 'ovariancancer')
     load ovariancancer
@@ -287,6 +303,10 @@ for nd = 1:length(datasets)
     data = [y  obs];
   else
     load(['data/',datasets{nd},'.mat'])
+    X = data(:, 2:end);
+    Y = data(:, 1);
+    X = X(:, std(X)~=0);
+    data = [Y X];
   end
   
   [labels,data] = standardize_data(data);
