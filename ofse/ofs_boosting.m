@@ -1,4 +1,4 @@
-function [mistakes, timerz] = ofs_boosting(data, labels, opts)
+function [mistakes, timerz, h_loss] = ofs_boosting(data, labels, opts)
 % OFS_BOOSTING Online Boosting using Online Feature Selection 
 %
 %  [mistakes, timerz] = OFS_BOOSTING(data, labels, opts)
@@ -57,6 +57,8 @@ labels_te = labels(2:T);
 % truncate out the vectors. no need to truncate the ensemble model yet 
 opts.models = randn(opts.n_features, opts.ensemble_size+1);
 mistakes = zeros(length(labels_te), opts.ensemble_size+1);
+h_loss = zeros(length(labels_te), opts.ensemble_size+1);
+
 for i = 1:opts.ensemble_size
   opts.models(:, i) = truncate(opts.models(:, i), opts.truncate(i));
 end
@@ -73,16 +75,18 @@ for t = 1:T-1
     end
   end
   
+  % if we are testing on partial information then we should create a mask
+  % for the features that are available to us
+  if opts.partial_test
+    mask = zeros(1, opts.n_features);
+    q = randperm(opts.n_features);
+    mask(q(1:opts.truncate(end))) = 1;
+  end
+    
   lambda_t = 1;  % set current instance weight 
   for k = 1:opts.ensemble_size
     
-    % if we are testing on partial information then we should create a mask
-    % for the features that are available to us
-    if opts.partial_test
-      mask = zeros(1, opts.n_features);
-      q = randperm(opts.n_features);
-      mask(q(1:opts.truncate(end))) = 1;
-    end
+    
     
     % perform the online bagging update the to `k`th ensmeble member 
     lambda_k = poissrnd(lambda_t);
@@ -95,7 +99,8 @@ for t = 1:T-1
     
     
     if opts.partial_test
-      if (sign(opts.models(:,k)'*(data_te(t, :).*mask)')*labels_te(t)) < 0
+      f_t = opts.models(:,k)'*(data_te(t, :).*mask)';
+      if (sign(f_t)*labels_te(t)) < 0
         mistakes(t, k) = 1;
         lambda_sw(k) = lambda_sw(k) + lambda_t;
         lambda_t = lambda_t*t/(2*lambda_sw(k));
@@ -104,7 +109,8 @@ for t = 1:T-1
         lambda_t = lambda_t*t/(2*lambda_sc(k));
       end 
     else
-      if (sign(opts.models(:,k)'*data_te(t, :)')*labels_te(t)) < 0
+      f_t = opts.models(:,k)'*data_te(t, :)';
+      if (sign(f_t)*labels_te(t)) < 0
         mistakes(t, k) = 1;
         lambda_sw(k) = lambda_sw(k) + lambda_t;
         lambda_t = lambda_t*t/(2*lambda_sw(k));
@@ -113,6 +119,7 @@ for t = 1:T-1
         lambda_t = lambda_t*t/(2*lambda_sc(k));
       end 
     end
+    h_loss(t, k) = hinge(f_t, labels_te(t));
     
   end
   
@@ -130,17 +137,17 @@ for t = 1:T-1
   opts.models(:, end) = truncate(new_weights, opts.truncate(end));
   
   if opts.partial_test
-    mask = zeros(1, opts.n_features);
-    q = randperm(opts.n_features);
-    mask(q(1:opts.truncate(k))) = 1;
-    if (sign(opts.models(:, end)'*(data_te(t, :).*mask)')*labels_te(t)) < 0 
+    f_t = opts.models(:, end)'*(data_te(t, :).*mask)';
+    if (sign(f_t)*labels_te(t)) < 0 
       mistakes(t, end) = 1;  
     end
   else
-    if (sign(opts.models(:, end)'*data_te(t, :)')*labels_te(t)) < 0 
+    f_t = opts.models(:, end)'*data_te(t, :)';
+    if (sign(f_t)*labels_te(t)) < 0 
       mistakes(t, end) = 1;  
     end
   end
+  h_loss(t, end) = hinge(f_t, labels_te(t));
   
   opts.epsilon = opts.epsilon*opts.anneal^t;
   

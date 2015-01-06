@@ -1,4 +1,4 @@
-function [mistakes, timerz] = ofs_bagging(data, labels, opts)
+function [mistakes, timerz, h_loss] = ofs_bagging(data, labels, opts)
 % OFS_BAGGING Online Bagging using Online Feature Selection 
 %
 %  [mistakes, timerz] = OFS_BAGGING(data, labels, opts)
@@ -59,6 +59,8 @@ labels_te = labels(2:T);
 % truncate out the vectors. no need to truncate the ensemble model yet 
 opts.models = randn(opts.n_features, opts.ensemble_size+1);
 mistakes = zeros(length(labels_te), opts.ensemble_size+1);
+h_loss = zeros(length(labels_te), opts.ensemble_size+1);
+
 for i = 1:opts.ensemble_size
   opts.models(:, i) = truncate(opts.models(:, i), opts.truncate(i));
 end
@@ -72,6 +74,14 @@ for t = 1:T-1
     end
   end
   
+  % if we are testing on partial information then we should create a mask
+  % for the features that are available to us
+  if opts.partial_test
+    mask = zeros(1, opts.n_features);
+    q = randperm(opts.n_features);
+    mask(q(1:opts.truncate(end))) = 1;
+  end
+  
   for k = 1:opts.ensemble_size
     
     % perform the online bagging update the to `k`th ensmeble member 
@@ -83,17 +93,17 @@ for t = 1:T-1
     % predict the output of the `k`th ensmeble member on the testing
     % sequence and update the mistakes if needed. 
     if opts.partial_test
-      mask = zeros(1, opts.n_features);
-      q = randperm(opts.n_features);
-      mask(q(1:opts.truncate(k))) = 1;
-      if (sign(opts.models(:,k)'*(data_te(t, :).*mask)')*labels_te(t)) < 0
+      f_t = opts.models(:,k)'*(data_te(t, :).*mask)';
+      if (sign(f_t)*labels_te(t)) < 0
         mistakes(t, k) = 1;
       end
     else
-      if (sign(opts.models(:,k)'*data_te(t, :)')*labels_te(t)) < 0
+      f_t = opts.models(:,k)'*data_te(t, :)';
+      if (sign(f_t)*labels_te(t)) < 0
         mistakes(t, k) = 1;
       end 
     end
+    h_loss(t, k) = hinge(f_t, labels_te(t));
 
   end
   
@@ -102,10 +112,8 @@ for t = 1:T-1
   opts.models(:, end) = truncate(mean(opts.models(:, 1:end-1),2), opts.truncate(end));
   
   if opts.partial_test
-    mask = zeros(1, opts.n_features);
-    q = randperm(opts.n_features);
-    mask(q(1:opts.truncate(k))) = 1;
-    if (sign(opts.models(:, end)'*(data_te(t, :).*mask)')*labels_te(t)) < 0 
+    f_t = opts.models(:,end)'*(data_te(t, :).*mask)';
+    if (sign(f_t)*labels_te(t)) < 0 
       mistakes(t, end) = 1;  
     end
   else
@@ -113,6 +121,8 @@ for t = 1:T-1
       mistakes(t, end) = 1;  
     end
   end
+  h_loss(t, end) = hinge(f_t, labels_te(t));
+  
   opts.epsilon = opts.epsilon*opts.anneal^t;
 end
 timerz = toc;

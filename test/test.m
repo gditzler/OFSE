@@ -17,9 +17,9 @@ opts.partial_test = 1;
 load german
 
 [labels,data] = standardize_data(data);
-[mistakes, timerz] = ofs_bagging(data, labels, opts);
+[mistakes, timerz, h_loss] = ofs_bagging(data, labels, opts);
 opts.partial_test = 0;
-[mistakes2, timerz] = ofs_bagging(data, labels, opts);
+[mistakes2, timerz, h_loss] = ofs_bagging(data, labels, opts);
 
 
 figure;
