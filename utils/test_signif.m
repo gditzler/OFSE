@@ -21,3 +21,4 @@ pr = normcdf(-z);
 pl = normcdf(z);
 p2 = 2*normcdf(-abs(z));
 pF = 1 - fcdf(Ff,k-1,(k-1)*(N-1)); % pvalue for the f-test
+H = pl < alpha/k;

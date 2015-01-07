@@ -51,7 +51,7 @@ clc;
 clear;
 close all;
 
-load mat/mistakes_experiment_no_anneal.mat
+load mat/mistakes_experiment_no_anneal_partialtest.mat
 
 disp('Data Set & Single & OFS-Bag & OFS-Boo & OFS-Bag-R & OFS-Boo-R')
 for nd = 1:length(datasets)
