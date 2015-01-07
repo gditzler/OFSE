@@ -12,10 +12,14 @@ mkdir pdf/
 mkdir mat/  
 ```
 
+Then run `run_experiments.m`. *Warning*: You'll need Matlab's distributed computing toolbox and the current implementation will open 25 workers. The plots and tables can be obtained by running parts of `plot_experiments.m`.  
+
 # License 
 
 MIT (See `LICENSE`)
 
 # Contact 
 
-* [Gregory Ditzler](http://gregoryditzler.com) (<gregory.ditzler@gmail.com>)
+* [Gregory Ditzler](http://gregoryditzler.com) (<gregory.ditzler@gmail.com>)`
+
+
