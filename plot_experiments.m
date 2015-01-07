@@ -46,6 +46,19 @@ for nd = 1:length(datasets)
   disp([datasets{nd}, ' & ', num2str(timerz_oba{nd}), ' & ', num2str(timerz_obo{nd}), ...
     ' & ', num2str(timerz_rba{nd}), ' & ', num2str(timerz_rbo{nd})])
 end
+%% print mistakes 
+clc;
+clear;
+close all;
+
+load mat/mistakes_experiment_no_anneal.mat
+
+disp('Data Set & Single & OFS-Bag & OFS-Boo & OFS-Bag-R & OFS-Boo-R')
+for nd = 1:length(datasets)
+  disp([datasets{nd}, ' & ', num2str(sum(mean(mistakes_oba{nd}(:,1:end-1),2))), ...
+    ' & ', num2str(sum(mistakes_oba{nd}(:,end))), ' & ', num2str(sum(mistakes_obo{nd}(:,end))), ...
+    ' & ', num2str(sum(mistakes_rba{nd}(:,end))), ' & ', num2str(sum(mistakes_rbo{nd}(:,end)))])
+end
 %% plot mistake RATE no annealing
 clc;
 clear;
