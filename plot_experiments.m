@@ -51,13 +51,32 @@ clc;
 clear;
 close all;
 
-load mat/mistakes_experiment_no_anneal_partialtest.mat
+load mat/mistakes_experiment_no_anneal.mat
 
 disp('Data Set & Single & OFS-Bag & OFS-Boo & OFS-Bag-R & OFS-Boo-R')
 for nd = 1:length(datasets)
-  disp([datasets{nd}, ' & ', num2str(sum(mean(mistakes_oba{nd}(:,1:end-1),2))), ...
-    ' & ', num2str(sum(mistakes_oba{nd}(:,end))), ' & ', num2str(sum(mistakes_obo{nd}(:,end))), ...
-    ' & ', num2str(sum(mistakes_rba{nd}(:,end))), ' & ', num2str(sum(mistakes_rbo{nd}(:,end)))])
+  if strcmp(datasets{nd}, 'ionosphere')
+    load ionosphere
+    [~,~,y] = unique(Y);
+    y(y==2) = -1;
+    X(:, 2) = [];
+    data = [y X];
+  elseif strcmp(datasets{nd}, 'ovariancancer')
+    load ovariancancer
+    [~,~,y] = unique(grp);
+    y(y==2) = -1;
+    data = [y  obs];
+  else
+    load(['data/', datasets{nd}, '.mat'])
+    X = data(:, 2:end);
+    Y = data(:, 1);
+    X = X(:, std(X)~=0);
+    data = [Y X];
+  end
+  
+  disp([datasets{nd}, ' & ', num2str(sum(mean(mistakes_oba{nd}(:,1:end-1),2))/(size(data,1)-1)), ...
+    ' & ', num2str(sum(mistakes_oba{nd}(:,end))/(size(data,1)-1)), ' & ', num2str(sum(mistakes_obo{nd}(:,end))/(size(data,1)-1)), ...
+    ' & ', num2str(sum(mistakes_rba{nd}(:,end))/(size(data,1)-1)), ' & ', num2str(sum(mistakes_rbo{nd}(:,end))/(size(data,1)-1))])
 end
 %% plot mistake RATE no annealing
 clc;
