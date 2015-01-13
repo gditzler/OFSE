@@ -1,5 +1,5 @@
 function [Y,X] = standardize_data(data)
-% STANDARDIZE_DATS Standardizes data for pre-processing
+% STANDARDIZE_DATA Standardizes data for pre-processing
 %
 % [Y,X] = standardize_data(data)
 %  
