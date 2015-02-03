@@ -14,7 +14,8 @@ function [mistakes, timerz, h_loss] = ofs_bagging(data, labels, opts)
 %     @opts.truncate: l0-norm (required)
 %     @opts.verbose: print evaulation round (mod(t,1000)==0)
 %
-%  See also OFS_BOOSTING, OFS_BAGGING_AVG, OFS_BAGGING_RANDTRUC_AVG
+%  See also 
+%  OFS_BOOSTING, OFS_BAGGING_AVG, OFS_BAGGING_RANDTRUC_AVG
 
 % perform some error checking 
 if ~isfield(opts, 'ensemble_size')
@@ -54,6 +55,7 @@ data_tr = data(1:T-1, :);
 data_te = data(2:T, :);
 labels_tr = labels(1:T-1);
 labels_te = labels(2:T);
+timerz = 0;
 
 % initialize the OFS models to be sampled from a Gaussian distribution then
 % truncate out the vectors. no need to truncate the ensemble model yet 
@@ -65,7 +67,6 @@ for i = 1:opts.ensemble_size
   opts.models(:, i) = truncate(opts.models(:, i), opts.truncate(i));
 end
 
-tic;
 for t = 1:T-1
   
   if opts.verbose
@@ -111,8 +112,10 @@ for t = 1:T-1
   % step, and update the number of mistakes made by the ensemble.
   opts.models(:, end) = truncate(mean(opts.models(:, 1:end-1),2), opts.truncate(end));
   
-  if opts.partial_test
+  tic;
+  if opts.partial_test 
     f_t = opts.models(:,end)'*(data_te(t, :).*mask)';
+    
     if (sign(f_t)*labels_te(t)) < 0 
       mistakes(t, end) = 1;  
     end
@@ -121,8 +124,8 @@ for t = 1:T-1
       mistakes(t, end) = 1;  
     end
   end
+  timerz = timerz + toc;
   h_loss(t, end) = hinge(f_t, labels_te(t));
   
   opts.epsilon = opts.epsilon*opts.anneal^t;
 end
-timerz = toc;

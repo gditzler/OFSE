@@ -13,7 +13,8 @@ function [mistakes, timerz, h_loss] = ofs_boosting(data, labels, opts)
 %     @opts.truncate: l0-norm (required)
 %     @opts.verbose: print evaulation round (mod(t,1000)==0)
 %
-%  See also OFS_BAGGING, OFS_BOOSTING_AVG, OFS_BOOSTING_RANDTRUC_AVG
+%  See also 
+%  OFS_BAGGING, OFS_BOOSTING_AVG, OFS_BOOSTING_RANDTRUC_AVG
 
 
 % perform some error checking 
@@ -136,6 +137,7 @@ for t = 1:T-1
   % step, and update the number of mistakes made by the ensemble.
   opts.models(:, end) = truncate(new_weights, opts.truncate(end));
   
+  tic;
   if opts.partial_test
     f_t = opts.models(:, end)'*(data_te(t, :).*mask)';
     if (sign(f_t)*labels_te(t)) < 0 
@@ -147,10 +149,10 @@ for t = 1:T-1
       mistakes(t, end) = 1;  
     end
   end
+  timerz = timerz + toc;
+  
   h_loss(t, end) = hinge(f_t, labels_te(t));
-  
   opts.epsilon = opts.epsilon*opts.anneal^t;
-  
 end
 
 timerz = toc;
