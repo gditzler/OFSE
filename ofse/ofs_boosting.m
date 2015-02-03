@@ -66,8 +66,8 @@ end
 
 lambda_sc = zeros(opts.ensemble_size, 1);
 lambda_sw = zeros(opts.ensemble_size, 1);
+timerz = 0;
 
-tic;
 for t = 1:T-1
   
   if opts.verbose
@@ -154,5 +154,3 @@ for t = 1:T-1
   h_loss(t, end) = hinge(f_t, labels_te(t));
   opts.epsilon = opts.epsilon*opts.anneal^t;
 end
-
-timerz = toc;
