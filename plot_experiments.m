@@ -43,8 +43,8 @@ load mat/mistakes_experiment_no_anneal.mat
 
 disp('Data Set & OFS-Bag & OFS-Boo & OFS-Bag-R & OFS-Boo-R')
 for nd = 1:length(datasets)
-  disp([datasets{nd}, ' & ', num2str(timerz_oba{nd}), ' & ', num2str(timerz_obo{nd}), ...
-    ' & ', num2str(timerz_rba{nd}), ' & ', num2str(timerz_rbo{nd})])
+  disp([datasets{nd}, ' & ', num2str(round(1000*timerz_oba{nd})/1000), ' & ', num2str(round(1000*timerz_obo{nd})/1000), ...
+    ' & ', num2str(round(1000*timerz_rba{nd})/1000), ' & ', num2str(round(1000*timerz_rbo{nd})/1000)])
 end
 %% print mistakes 
 clc;
