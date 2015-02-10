@@ -89,11 +89,11 @@ for t = 1:T-1
   if opts.fixed_partial
     if random('Binomial', 1, opts.epsilon) == 1,
       perm_t = randperm(size(opts.models(:, 1), 1));
-      c_t = perm_t(1:opts.truncate(idx)-1);
+      c_t = perm_t(1:opts.truncate(1)-1);
       v_idx = zeros(size(opts.models(:, 1),1),1);
       v_idx(c_t) = 1;
     else
-      v_idx = (opts.models(:, idx)~=0);
+      v_idx = (opts.models(:, 1)~=0);
     end
   end
   
