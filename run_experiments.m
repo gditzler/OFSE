@@ -29,7 +29,7 @@ opts.ensemble_size = 25;  % number of ofs classifiers
 opts.epsilon = 0.2;       % exploration parameter
 opts.eta = 0.2;           % learning rate
 opts.R = 10;              % regularization
-opts.avg = 25;            % # of permuation averages
+opts.avg = 15;            % # of permuation averages
 opts.frac = 0.25;         % fraction of features to select
 opts.annel = 1;
 
@@ -45,7 +45,7 @@ timerz_rbo = cell(1, length(datasets));
 
 % meant for gail's cluster
 delete(gcp('nocreate'));
-parpool(25);
+parpool(15);
 
 for nd = 1:length(datasets) 
   disp(['Running: ', datasets{nd}]);
@@ -108,7 +108,7 @@ opts.ensemble_size = 25;  % number of ofs classifiers
 opts.epsilon = 0.2;       % exploration parameter
 opts.eta = 0.2;           % learning rate
 opts.R = 10;              % regularization
-opts.avg = 25;            % # of permuation averages
+opts.avg = 15;            % # of permuation averages
 opts.frac = 0.25;         % fraction of features to select
 opts.annel = .9999;
 
@@ -124,7 +124,7 @@ timerz_rbo = cell(1, length(datasets));
 
 % meant for gail's cluster
 delete(gcp('nocreate'));
-parpool(25);
+parpool(15);
 
 for nd = 1:length(datasets) 
   disp(['Running: ', datasets{nd}]);
@@ -189,7 +189,7 @@ opts.ensemble_size = 25;  % number of ofs classifiers
 opts.epsilon = 0.2;       % exploration parameter
 opts.eta = 0.2;           % learning rate
 opts.R = 10;              % regularization
-opts.avg = 25;            % # of permuation averages
+opts.avg = 15;            % # of permuation averages
 opts.frac = 0.25;         % fraction of features to select
 opts.annel = 1;
 opts.partial = 1;
@@ -206,7 +206,7 @@ timerz_rbo = cell(1, length(datasets));
 
 % meant for gail's cluster
 delete(gcp('nocreate'));
-parpool(25);
+parpool(15);
 
 for nd = 1:length(datasets) 
   disp(['Running: ', datasets{nd}]);
@@ -269,7 +269,7 @@ opts.ensemble_size = 25;  % number of ofs classifiers
 opts.epsilon = 0.2;       % exploration parameter
 opts.eta = 0.2;           % learning rate
 opts.R = 10;              % regularization
-opts.avg = 25;            % # of permuation averages
+opts.avg = 15;            % # of permuation averages
 opts.frac = 0.25;         % fraction of features to select
 opts.annel = .9999;
 
@@ -285,7 +285,7 @@ timerz_rbo = cell(1, length(datasets));
 
 % meant for gail's cluster
 delete(gcp('nocreate'));
-parpool(25);
+parpool(15);
 
 for nd = 1:length(datasets) 
   disp(['Running: ', datasets{nd}]);
@@ -350,7 +350,7 @@ opts.ensemble_size = 25;  % number of ofs classifiers
 opts.epsilon = 0.2;       % exploration parameter
 opts.eta = 0.2;           % learning rate
 opts.R = 10;              % regularization
-opts.avg = 25;            % # of permuation averages
+opts.avg = 15;            % # of permuation averages
 opts.frac = 0.25;         % fraction of features to select
 opts.annel = 1;
 opts.fixed_partial = true;
@@ -367,7 +367,7 @@ timerz_rbo = cell(1, length(datasets));
 
 % meant for gail's cluster
 delete(gcp('nocreate'));
-parpool(25);
+parpool(15);
 
 for nd = 1:length(datasets) 
   disp(['Running: ', datasets{nd}]);
@@ -430,7 +430,7 @@ opts.ensemble_size = 25;  % number of ofs classifiers
 opts.epsilon = 0.2;       % exploration parameter
 opts.eta = 0.2;           % learning rate
 opts.R = 10;              % regularization
-opts.avg = 25;            % # of permuation averages
+opts.avg = 15;            % # of permuation averages
 opts.frac = 0.25;         % fraction of features to select
 opts.annel = .9999;
 opts.fixed_partial = false;
@@ -447,7 +447,7 @@ timerz_rbo = cell(1, length(datasets));
 
 % meant for gail's cluster
 delete(gcp('nocreate'));
-parpool(25);
+parpool(15);
 
 for nd = 1:length(datasets) 
   disp(['Running: ', datasets{nd}]);
@@ -512,7 +512,7 @@ opts.ensemble_size = 25;  % number of ofs classifiers
 opts.epsilon = 0.2;       % exploration parameter
 opts.eta = 0.2;           % learning rate
 opts.R = 10;              % regularization
-opts.avg = 25;            % # of permuation averages
+opts.avg = 15;            % # of permuation averages
 opts.frac = 0.25;         % fraction of features to select
 opts.annel = 1;
 opts.partial = 1;
@@ -530,7 +530,7 @@ timerz_rbo = cell(1, length(datasets));
 
 % meant for gail's cluster
 delete(gcp('nocreate'));
-parpool(25);
+parpool(15);
 
 for nd = 1:length(datasets) 
   disp(['Running: ', datasets{nd}]);
@@ -593,7 +593,7 @@ opts.ensemble_size = 25;  % number of ofs classifiers
 opts.epsilon = 0.2;       % exploration parameter
 opts.eta = 0.2;           % learning rate
 opts.R = 10;              % regularization
-opts.avg = 25;            % # of permuation averages
+opts.avg = 15;            % # of permuation averages
 opts.frac = 0.25;         % fraction of features to select
 opts.annel = .9999;
 opts.partial_test = 1;
@@ -611,7 +611,7 @@ timerz_rbo = cell(1, length(datasets));
 
 % meant for gail's cluster
 delete(gcp('nocreate'));
-parpool(25);
+parpool(15);
 
 for nd = 1:length(datasets) 
   disp(['Running: ', datasets{nd}]);
