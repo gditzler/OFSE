@@ -1,4 +1,4 @@
-function weights = update_ofs(x_t, y_t, opts, idx)
+function weights = update_ofs(x_t, y_t, opts, idx, v_idx)
 % UPDATE_OFS Perform a single instance OFS update to parameters
 % 
 %  weights = UPDATE_OFS(x_t, y_t, opts, idx)
@@ -10,14 +10,17 @@ function weights = update_ofs(x_t, y_t, opts, idx)
 %  updated with the new training sample
 %
 % See also OFS_BAGGING, OFS_BOOSTING
-if random('Binomial', 1, opts.epsilon) == 1,
-  perm_t = randperm(size(opts.models(:, idx), 1));
-  c_t = perm_t(1:opts.truncate(idx)-1);
-  v_idx = zeros(size(opts.models(:, idx),1),1);
-  v_idx(c_t) = 1;
-  %v_idx = find(v_idx==1);
-else
-  v_idx = (opts.models(:, idx)~=0);
+
+if nargin < 5 
+  if random('Binomial', 1, opts.epsilon) == 1,
+    perm_t = randperm(size(opts.models(:, idx), 1));
+    c_t = perm_t(1:opts.truncate(idx)-1);
+    v_idx = zeros(size(opts.models(:, idx),1),1);
+    v_idx(c_t) = 1;
+    %v_idx = find(v_idx==1);
+  else
+    v_idx = (opts.models(:, idx)~=0);
+  end
 end
 
 w_t = opts.models(:, idx);

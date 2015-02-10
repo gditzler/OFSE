@@ -13,6 +13,7 @@ opts.eta = 0.2;
 opts.R = 10;
 opts.truncate = 10;
 opts.partial_test = 1;
+opts.fixed_partial = false;
 
 load german
 

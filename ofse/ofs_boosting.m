@@ -24,6 +24,9 @@ end
 if ~isfield(opts, 'truncate')
   error('opts.truncate must be specified');
 end
+if ~isfield(opts, 'fixed_partial')
+  opts.fixed_partial = false;
+end
 if ~isfield(opts, 'epsilon')
   opts.epsilon = .1;
 end
@@ -83,16 +86,30 @@ for t = 1:T-1
     q = randperm(opts.n_features);
     mask(q(1:opts.truncate(end))) = 1;
   end
-    
+  
+  if opts.fixed_partial
+    if random('Binomial', 1, opts.epsilon) == 1,
+      perm_t = randperm(size(opts.models(:, 1), 1));
+      c_t = perm_t(1:opts.truncate(idx)-1);
+      v_idx = zeros(size(opts.models(:, 1),1),1);
+      v_idx(c_t) = 1;
+    else
+      v_idx = (opts.models(:, idx)~=0);
+    end
+  end
+  
   lambda_t = 1;  % set current instance weight 
+  
   for k = 1:opts.ensemble_size
-    
-    
     
     % perform the online bagging update the to `k`th ensmeble member 
     lambda_k = poissrnd(lambda_t);
     for j = 1:lambda_k
-      opts.models(:,k) = update_ofs(data_tr(t, :), labels_tr(t), opts, k);
+      if opts.fixed_partial
+        opts.models(:,k) = update_ofs(data_tr(t, :), labels_tr(t), opts, k, v_idx);
+      else
+        opts.models(:,k) = update_ofs(data_tr(t, :), labels_tr(t), opts, k);
+      end
     end
     
     % predict the output of the `k`th ensmeble member on the testing
