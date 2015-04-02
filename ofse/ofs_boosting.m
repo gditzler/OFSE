@@ -118,7 +118,7 @@ for t = 1:T-1
     
     if opts.partial_test
       f_t = opts.models(:,k)'*(data_te(t, :).*mask)';
-      if (sign(f_t)*labels_te(t)) < 0
+      if ((f_t)*labels_te(t)) < 0
         mistakes(t, k) = 1;
         lambda_sw(k) = lambda_sw(k) + lambda_t;
         lambda_t = lambda_t*t/(2*lambda_sw(k));
@@ -128,7 +128,7 @@ for t = 1:T-1
       end 
     else
       f_t = opts.models(:,k)'*data_te(t, :)';
-      if (sign(f_t)*labels_te(t)) < 0
+      if ((f_t)*labels_te(t)) < 0
         mistakes(t, k) = 1;
         lambda_sw(k) = lambda_sw(k) + lambda_t;
         lambda_t = lambda_t*t/(2*lambda_sw(k));
@@ -157,12 +157,12 @@ for t = 1:T-1
   tic;
   if opts.partial_test
     f_t = opts.models(:, end)'*(data_te(t, :).*mask)';
-    if (sign(f_t)*labels_te(t)) < 0 
+    if ((f_t)*labels_te(t)) < 0 
       mistakes(t, end) = 1;  
     end
   else
     f_t = opts.models(:, end)'*data_te(t, :)';
-    if (sign(f_t)*labels_te(t)) < 0 
+    if ((f_t)*labels_te(t)) < 0 
       mistakes(t, end) = 1;  
     end
   end

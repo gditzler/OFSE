@@ -113,12 +113,12 @@ for t = 1:T-1
     % sequence and update the mistakes if needed. 
     if opts.partial_test
       f_t = opts.models(:,k)'*(data_te(t, :).*mask)';
-      if (sign(f_t)*labels_te(t)) < 0
+      if (f_t*labels_te(t)) < 0
         mistakes(t, k) = 1;
       end
     else
       f_t = opts.models(:,k)'*data_te(t, :)';
-      if (sign(f_t)*labels_te(t)) < 0
+      if (f_t*labels_te(t)) < 0
         mistakes(t, k) = 1;
       end 
     end
@@ -134,11 +134,11 @@ for t = 1:T-1
   if opts.partial_test 
     f_t = opts.models(:,end)'*(data_te(t, :).*mask)';
     
-    if (sign(f_t)*labels_te(t)) < 0 
+    if (f_t)*labels_te(t) < 0 
       mistakes(t, end) = 1;  
     end
   else
-    if (sign(opts.models(:, end)'*data_te(t, :)')*labels_te(t)) < 0 
+    if ((opts.models(:, end)'*data_te(t, :)')*labels_te(t)) < 0 
       mistakes(t, end) = 1;  
     end
   end
