@@ -133,7 +133,6 @@ for t = 1:T-1
   tic;
   if opts.partial_test 
     f_t = opts.models(:,end)'*(data_te(t, :).*mask)';
-    
     if (f_t)*labels_te(t) < 0 
       mistakes(t, end) = 1;  
     end
