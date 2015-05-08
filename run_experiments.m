@@ -18,7 +18,7 @@ close all;
 addpath('ofse/');
 
 datasets = {'a8a', 'german', 'magic04', 'spambase', 'splice', 'svmguide3', ...
-  'sido0', 'ionosphere', 'ovariancancer'};
+  'sido0', 'ionosphere', 'ovariancancer', 'arrhythmia'};
 % datasets = {'a8a', 'german', 'magic04', 'spambase', 'splice', 'svmguide3', ...
 %   'sido0', 'uni_S10000F500R25', 'uni_S10000F500R50', 'uni_S10000F500R100', ...
 %   'uni_S10000F500R150', 'uni_S10000F500R200'};
@@ -61,6 +61,18 @@ for nd = 1:length(datasets)
     [~,~,y] = unique(grp);
     y(y==2) = -1;
     data = [y  obs];
+  elseif strcmp(datasets{nd}, 'arrhythmia')
+    load arrhythmia
+    dels = find(Y==16);
+    Y(dels) = [];
+    X(dels, :) = [];
+    X(:, [11,2,14]) = [];
+    z = sum(isnan(X),2);
+    X(z==1, :) = [];
+    Y(z==1) = [];
+    Y(Y~=1) = -1;
+    data = [Y X];
+    clear dels Description VarNames X Y z
   else
     load(['data/', datasets{nd}, '.mat'])
     X = data(:, 2:end);
@@ -98,7 +110,7 @@ close all;
 addpath('ofse/');
 
 datasets = {'a8a', 'german', 'magic04', 'spambase', 'splice', 'svmguide3', ...
-  'sido0', 'ionosphere', 'ovariancancer'};
+  'sido0', 'ionosphere', 'ovariancancer', 'arrhythmia'};
 % datasets = {'a8a', 'german', 'magic04', 'spambase', 'splice', 'svmguide3', ...
 %   'sido0', 'uni_S10000F500R25', 'uni_S10000F500R50', 'uni_S10000F500R100', ...
 %   'uni_S10000F500R150', 'uni_S10000F500R200'};
@@ -140,6 +152,18 @@ for nd = 1:length(datasets)
     [~,~,y] = unique(grp);
     y(y==2) = -1;
     data = [y  obs];
+  elseif strcmp(datasets{nd}, 'arrhythmia')
+    load arrhythmia
+    dels = find(Y==16);
+    Y(dels) = [];
+    X(dels, :) = [];
+    X(:, [11,2,14]) = [];
+    z = sum(isnan(X),2);
+    X(z==1, :) = [];
+    Y(z==1) = [];
+    Y(Y~=1) = -1;
+    data = [Y X];
+    clear dels Description VarNames X Y z
   else
     load(['data/',datasets{nd},'.mat'])
     X = data(:, 2:end);
@@ -178,7 +202,7 @@ close all;
 addpath('ofse/');
 
 datasets = {'a8a', 'german', 'magic04', 'spambase', 'splice', 'svmguide3', ...
-  'sido0', 'ionosphere', 'ovariancancer'};
+  'sido0', 'ionosphere', 'ovariancancer', 'arrhythmia'};
 % datasets = {'a8a', 'german', 'magic04', 'spambase', 'splice', 'svmguide3', ...
 %   'sido0', 'uni_S10000F500R25', 'uni_S10000F500R50', 'uni_S10000F500R100', ...
 %   'uni_S10000F500R150', 'uni_S10000F500R200'};
@@ -222,6 +246,18 @@ for nd = 1:length(datasets)
     [~,~,y] = unique(grp);
     y(y==2) = -1;
     data = [y  obs];
+  elseif strcmp(datasets{nd}, 'arrhythmia')
+    load arrhythmia
+    dels = find(Y==16);
+    Y(dels) = [];
+    X(dels, :) = [];
+    X(:, [11,2,14]) = [];
+    z = sum(isnan(X),2);
+    X(z==1, :) = [];
+    Y(z==1) = [];
+    Y(Y~=1) = -1;
+    data = [Y X];
+    clear dels Description VarNames X Y z
   else
     load(['data/',datasets{nd},'.mat'])
     X = data(:, 2:end);
@@ -259,7 +295,7 @@ close all;
 addpath('ofse/');
 
 datasets = {'a8a', 'german', 'magic04', 'spambase', 'splice', 'svmguide3', ...
-  'sido0', 'ionosphere', 'ovariancancer'};
+  'sido0', 'ionosphere', 'ovariancancer', 'arrhythmia'};
 % datasets = {'a8a', 'german', 'magic04', 'spambase', 'splice', 'svmguide3', ...
 %   'sido0', 'uni_S10000F500R25', 'uni_S10000F500R50', 'uni_S10000F500R100', ...
 %   'uni_S10000F500R150', 'uni_S10000F500R200'};
@@ -301,6 +337,18 @@ for nd = 1:length(datasets)
     [~,~,y] = unique(grp);
     y(y==2) = -1;
     data = [y  obs];
+  elseif strcmp(datasets{nd}, 'arrhythmia')
+    load arrhythmia
+    dels = find(Y==16);
+    Y(dels) = [];
+    X(dels, :) = [];
+    X(:, [11,2,14]) = [];
+    z = sum(isnan(X),2);
+    X(z==1, :) = [];
+    Y(z==1) = [];
+    Y(Y~=1) = -1;
+    data = [Y X];
+    clear dels Description VarNames X Y z
   else
     load(['data/',datasets{nd},'.mat'])
     X = data(:, 2:end);
@@ -339,7 +387,7 @@ close all;
 addpath('ofse/');
 
 datasets = {'a8a', 'german', 'magic04', 'spambase', 'splice', 'svmguide3', ...
-  'sido0', 'ionosphere', 'ovariancancer'};
+  'sido0', 'ionosphere', 'ovariancancer', 'arrhythmia'};
 % datasets = {'a8a', 'german', 'magic04', 'spambase', 'splice', 'svmguide3', ...
 %   'sido0', 'uni_S10000F500R25', 'uni_S10000F500R50', 'uni_S10000F500R100', ...
 %   'uni_S10000F500R150', 'uni_S10000F500R200'};
@@ -383,6 +431,18 @@ for nd = 1:length(datasets)
     [~,~,y] = unique(grp);
     y(y==2) = -1;
     data = [y  obs];
+  elseif strcmp(datasets{nd}, 'arrhythmia')
+    load arrhythmia
+    dels = find(Y==16);
+    Y(dels) = [];
+    X(dels, :) = [];
+    X(:, [11,2,14]) = [];
+    z = sum(isnan(X),2);
+    X(z==1, :) = [];
+    Y(z==1) = [];
+    Y(Y~=1) = -1;
+    data = [Y X];
+    clear dels Description VarNames X Y z
   else
     load(['data/', datasets{nd}, '.mat'])
     X = data(:, 2:end);
@@ -420,7 +480,7 @@ close all;
 addpath('ofse/');
 
 datasets = {'a8a', 'german', 'magic04', 'spambase', 'splice', 'svmguide3', ...
-  'sido0', 'ionosphere', 'ovariancancer'};
+  'sido0', 'ionosphere', 'ovariancancer', 'arrhythmia'};
 % datasets = {'a8a', 'german', 'magic04', 'spambase', 'splice', 'svmguide3', ...
 %   'sido0', 'uni_S10000F500R25', 'uni_S10000F500R50', 'uni_S10000F500R100', ...
 %   'uni_S10000F500R150', 'uni_S10000F500R200'};
@@ -463,6 +523,18 @@ for nd = 1:length(datasets)
     [~,~,y] = unique(grp);
     y(y==2) = -1;
     data = [y  obs];
+  elseif strcmp(datasets{nd}, 'arrhythmia')
+    load arrhythmia
+    dels = find(Y==16);
+    Y(dels) = [];
+    X(dels, :) = [];
+    X(:, [11,2,14]) = [];
+    z = sum(isnan(X),2);
+    X(z==1, :) = [];
+    Y(z==1) = [];
+    Y(Y~=1) = -1;
+    data = [Y X];
+    clear dels Description VarNames X Y z
   else
     load(['data/',datasets{nd},'.mat'])
     X = data(:, 2:end);
@@ -501,7 +573,7 @@ close all;
 addpath('ofse/');
 
 datasets = {'a8a', 'german', 'magic04', 'spambase', 'splice', 'svmguide3', ...
-  'sido0', 'ionosphere', 'ovariancancer'};
+  'sido0', 'ionosphere', 'ovariancancer', 'arrhythmia'};
 % datasets = {'a8a', 'german', 'magic04', 'spambase', 'splice', 'svmguide3', ...
 %   'sido0', 'uni_S10000F500R25', 'uni_S10000F500R50', 'uni_S10000F500R100', ...
 %   'uni_S10000F500R150', 'uni_S10000F500R200'};
@@ -546,6 +618,18 @@ for nd = 1:length(datasets)
     [~,~,y] = unique(grp);
     y(y==2) = -1;
     data = [y  obs];
+  elseif strcmp(datasets{nd}, 'arrhythmia')
+    load arrhythmia
+    dels = find(Y==16);
+    Y(dels) = [];
+    X(dels, :) = [];
+    X(:, [11,2,14]) = [];
+    z = sum(isnan(X),2);
+    X(z==1, :) = [];
+    Y(z==1) = [];
+    Y(Y~=1) = -1;
+    data = [Y X];
+    clear dels Description VarNames X Y z
   else
     load(['data/',datasets{nd},'.mat'])
     X = data(:, 2:end);
@@ -583,7 +667,7 @@ close all;
 addpath('ofse/');
 
 datasets = {'a8a', 'german', 'magic04', 'spambase', 'splice', 'svmguide3', ...
-  'sido0', 'ionosphere', 'ovariancancer'};
+  'sido0', 'ionosphere', 'ovariancancer', 'arrhythmia'};
 % datasets = {'a8a', 'german', 'magic04', 'spambase', 'splice', 'svmguide3', ...
 %   'sido0', 'uni_S10000F500R25', 'uni_S10000F500R50', 'uni_S10000F500R100', ...
 %   'uni_S10000F500R150', 'uni_S10000F500R200'};
@@ -627,6 +711,18 @@ for nd = 1:length(datasets)
     [~,~,y] = unique(grp);
     y(y==2) = -1;
     data = [y  obs];
+  elseif strcmp(datasets{nd}, 'arrhythmia')
+    load arrhythmia
+    dels = find(Y==16);
+    Y(dels) = [];
+    X(dels, :) = [];
+    X(:, [11,2,14]) = [];
+    z = sum(isnan(X),2);
+    X(z==1, :) = [];
+    Y(z==1) = [];
+    Y(Y~=1) = -1;
+    data = [Y X];
+    clear dels Description VarNames X Y z
   else
     load(['data/',datasets{nd},'.mat'])
     X = data(:, 2:end);
