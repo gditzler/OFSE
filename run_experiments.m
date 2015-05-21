@@ -25,7 +25,7 @@ datasets = {'a8a', 'german', 'magic04', 'spambase', 'splice', 'svmguide3', ...
 
 
 opts.lambda = 1;          % bagging parameter
-opts.ensemble_size = 25;  % number of ofs classifiers
+opts.ensemble_size = 100;  % number of ofs classifiers
 opts.epsilon = 0.2;       % exploration parameter
 opts.eta = 0.2;           % learning rate
 opts.R = 10;              % regularization
@@ -116,7 +116,7 @@ datasets = {'a8a', 'german', 'magic04', 'spambase', 'splice', 'svmguide3', ...
 %   'uni_S10000F500R150', 'uni_S10000F500R200'};
 
 opts.lambda = 1;          % bagging parameter
-opts.ensemble_size = 25;  % number of ofs classifiers
+opts.ensemble_size = 100;  % number of ofs classifiers
 opts.epsilon = 0.2;       % exploration parameter
 opts.eta = 0.2;           % learning rate
 opts.R = 10;              % regularization
@@ -172,7 +172,7 @@ for nd = 1:length(datasets)
     data = [Y X];
   end
   
-  [labels,data] = standardize_data(data);
+  [labels, data] = standardize_data(data);
   
   opts.truncate = floor(size(data,2)*opts.frac);
   
@@ -209,7 +209,7 @@ datasets = {'a8a', 'german', 'magic04', 'spambase', 'splice', 'svmguide3', ...
 
 
 opts.lambda = 1;          % bagging parameter
-opts.ensemble_size = 25;  % number of ofs classifiers
+opts.ensemble_size = 100;  % number of ofs classifiers
 opts.epsilon = 0.2;       % exploration parameter
 opts.eta = 0.2;           % learning rate
 opts.R = 10;              % regularization
@@ -301,7 +301,7 @@ datasets = {'a8a', 'german', 'magic04', 'spambase', 'splice', 'svmguide3', ...
 %   'uni_S10000F500R150', 'uni_S10000F500R200'};
 
 opts.lambda = 1;          % bagging parameter
-opts.ensemble_size = 25;  % number of ofs classifiers
+opts.ensemble_size = 100;  % number of ofs classifiers
 opts.epsilon = 0.2;       % exploration parameter
 opts.eta = 0.2;           % learning rate
 opts.R = 10;              % regularization
@@ -394,7 +394,7 @@ datasets = {'a8a', 'german', 'magic04', 'spambase', 'splice', 'svmguide3', ...
 
 
 opts.lambda = 1;          % bagging parameter
-opts.ensemble_size = 25;  % number of ofs classifiers
+opts.ensemble_size = 100;  % number of ofs classifiers
 opts.epsilon = 0.2;       % exploration parameter
 opts.eta = 0.2;           % learning rate
 opts.R = 10;              % regularization
@@ -450,7 +450,7 @@ for nd = 1:length(datasets)
     X = X(:, std(X)~=0);
     data = [Y X];
   end
-  [labels,data] = standardize_data(data);
+  [labels, data] = standardize_data(data);
   
   opts.truncate = floor(size(data,2)*opts.frac);
   
@@ -486,7 +486,7 @@ datasets = {'a8a', 'german', 'magic04', 'spambase', 'splice', 'svmguide3', ...
 %   'uni_S10000F500R150', 'uni_S10000F500R200'};
 
 opts.lambda = 1;          % bagging parameter
-opts.ensemble_size = 25;  % number of ofs classifiers
+opts.ensemble_size = 100;  % number of ofs classifiers
 opts.epsilon = 0.2;       % exploration parameter
 opts.eta = 0.2;           % learning rate
 opts.R = 10;              % regularization
@@ -543,7 +543,7 @@ for nd = 1:length(datasets)
     data = [Y X];
   end
   
-  [labels,data] = standardize_data(data);
+  [labels, data] = standardize_data(data);
   
   opts.truncate = floor(size(data,2)*opts.frac);
   
@@ -580,7 +580,7 @@ datasets = {'a8a', 'german', 'magic04', 'spambase', 'splice', 'svmguide3', ...
 
 
 opts.lambda = 1;          % bagging parameter
-opts.ensemble_size = 25;  % number of ofs classifiers
+opts.ensemble_size = 100;  % number of ofs classifiers
 opts.epsilon = 0.2;       % exploration parameter
 opts.eta = 0.2;           % learning rate
 opts.R = 10;              % regularization
@@ -637,7 +637,7 @@ for nd = 1:length(datasets)
     X = X(:, std(X)~=0);
     data = [Y X];
   end
-  [labels,data] = standardize_data(data);
+  [labels, data] = standardize_data(data);
   
   opts.truncate = floor(size(data,2)*opts.frac);
   
@@ -673,7 +673,7 @@ datasets = {'a8a', 'german', 'magic04', 'spambase', 'splice', 'svmguide3', ...
 %   'uni_S10000F500R150', 'uni_S10000F500R200'};
 
 opts.lambda = 1;          % bagging parameter
-opts.ensemble_size = 25;  % number of ofs classifiers
+opts.ensemble_size = 100;  % number of ofs classifiers
 opts.epsilon = 0.2;       % exploration parameter
 opts.eta = 0.2;           % learning rate
 opts.R = 10;              % regularization
@@ -731,7 +731,7 @@ for nd = 1:length(datasets)
     data = [Y X];
   end
   
-  [labels,data] = standardize_data(data);
+  [labels, data] = standardize_data(data);
   
   opts.truncate = floor(size(data,2)*opts.frac);
   
