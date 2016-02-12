@@ -17,8 +17,10 @@ close all;
 
 addpath('ofse/');
 
-datasets = {'a8a', 'german', 'magic04', 'spambase', 'splice', 'svmguide3', ...
-  'sido0', 'ionosphere', 'ovariancancer', 'arrhythmia'};
+datasets = {'a8a', 'german', 'magic04', 'spambase', 'splice', 'svmguide3', ... 
+  'ionosphere', 'ovariancancer', 'arrhythmia', 'sido0',...
+  'miniboone.csv', 'breast-cancer-wisc-diag.csv', 'breast-cancer-wisc-prog.csv', 'chess-krvkp.csv','conn-bench-sonar-mines-rocks.csv',...
+  'connect-4.csv','molec-biol-promoter.csv'};
 % datasets = {'a8a', 'german', 'magic04', 'spambase', 'splice', 'svmguide3', ...
 %   'sido0', 'uni_S10000F500R25', 'uni_S10000F500R50', 'uni_S10000F500R100', ...
 %   'uni_S10000F500R150', 'uni_S10000F500R200'};
@@ -49,7 +51,7 @@ parpool(15);
 
 for nd = 1:length(datasets) 
   disp(['Running: ', datasets{nd}]);
-  
+
   if strcmp(datasets{nd}, 'ionosphere')
     load ionosphere
     [~,~,y] = unique(Y);
@@ -73,6 +75,12 @@ for nd = 1:length(datasets)
     Y(Y~=1) = -1;
     data = [Y X];
     clear dels Description VarNames X Y z
+  elseif length(findstr('csv', datasets{nd})) > 0
+    data = load(['../ClassificationDatasets/csv/', datasets{nd}]);
+    X = data(:, 1:end-1);
+    Y = data(:, end);
+    X = X(:, std(X)~=0);
+    data = [Y X];
   else
     load(['data/', datasets{nd}, '.mat'])
     X = data(:, 2:end);
@@ -109,8 +117,10 @@ close all;
 
 addpath('ofse/');
 
-datasets = {'a8a', 'german', 'magic04', 'spambase', 'splice', 'svmguide3', ...
-  'sido0', 'ionosphere', 'ovariancancer', 'arrhythmia'};
+datasets = {'a8a', 'german', 'magic04', 'spambase', 'splice', 'svmguide3', ... 
+  'ionosphere', 'ovariancancer', 'arrhythmia', 'sido0',...
+  'miniboone.csv', 'breast-cancer-wisc-diag.csv', 'breast-cancer-wisc-prog.csv', 'chess-krvkp.csv','conn-bench-sonar-mines-rocks.csv',...
+  'connect-4.csv','molec-biol-promoter.csv'};
 % datasets = {'a8a', 'german', 'magic04', 'spambase', 'splice', 'svmguide3', ...
 %   'sido0', 'uni_S10000F500R25', 'uni_S10000F500R50', 'uni_S10000F500R100', ...
 %   'uni_S10000F500R150', 'uni_S10000F500R200'};
@@ -164,8 +174,14 @@ for nd = 1:length(datasets)
     Y(Y~=1) = -1;
     data = [Y X];
     clear dels Description VarNames X Y z
+  elseif length(findstr('csv', datasets{nd})) > 0
+    data = load(['../ClassificationDatasets/csv/', datasets{nd}]);
+    X = data(:, 1:end-1);
+    Y = data(:, end);
+    X = X(:, std(X)~=0);
+    data = [Y X];
   else
-    load(['data/',datasets{nd},'.mat'])
+    load(['data/', datasets{nd}, '.mat'])
     X = data(:, 2:end);
     Y = data(:, 1);
     X = X(:, std(X)~=0);
@@ -201,8 +217,10 @@ close all;
 
 addpath('ofse/');
 
-datasets = {'a8a', 'german', 'magic04', 'spambase', 'splice', 'svmguide3', ...
-  'sido0', 'ionosphere', 'ovariancancer', 'arrhythmia'};
+datasets = {'a8a', 'german', 'magic04', 'spambase', 'splice', 'svmguide3', ... 
+  'ionosphere', 'ovariancancer', 'arrhythmia', 'sido0',...
+  'miniboone.csv', 'breast-cancer-wisc-diag.csv', 'breast-cancer-wisc-prog.csv', 'chess-krvkp.csv','conn-bench-sonar-mines-rocks.csv',...
+  'connect-4.csv','molec-biol-promoter.csv'};
 % datasets = {'a8a', 'german', 'magic04', 'spambase', 'splice', 'svmguide3', ...
 %   'sido0', 'uni_S10000F500R25', 'uni_S10000F500R50', 'uni_S10000F500R100', ...
 %   'uni_S10000F500R150', 'uni_S10000F500R200'};
@@ -258,8 +276,14 @@ for nd = 1:length(datasets)
     Y(Y~=1) = -1;
     data = [Y X];
     clear dels Description VarNames X Y z
+  elseif length(findstr('csv', datasets{nd})) > 0
+    data = load(['../ClassificationDatasets/csv/', datasets{nd}]);
+    X = data(:, 1:end-1);
+    Y = data(:, end);
+    X = X(:, std(X)~=0);
+    data = [Y X];
   else
-    load(['data/',datasets{nd},'.mat'])
+    load(['data/', datasets{nd}, '.mat'])
     X = data(:, 2:end);
     Y = data(:, 1);
     X = X(:, std(X)~=0);
@@ -294,8 +318,10 @@ close all;
 
 addpath('ofse/');
 
-datasets = {'a8a', 'german', 'magic04', 'spambase', 'splice', 'svmguide3', ...
-  'sido0', 'ionosphere', 'ovariancancer', 'arrhythmia'};
+datasets = {'a8a', 'german', 'magic04', 'spambase', 'splice', 'svmguide3', ... 
+  'ionosphere', 'ovariancancer', 'arrhythmia', 'sido0',...
+  'miniboone.csv', 'breast-cancer-wisc-diag.csv', 'breast-cancer-wisc-prog.csv', 'chess-krvkp.csv','conn-bench-sonar-mines-rocks.csv',...
+  'connect-4.csv','molec-biol-promoter.csv'};
 % datasets = {'a8a', 'german', 'magic04', 'spambase', 'splice', 'svmguide3', ...
 %   'sido0', 'uni_S10000F500R25', 'uni_S10000F500R50', 'uni_S10000F500R100', ...
 %   'uni_S10000F500R150', 'uni_S10000F500R200'};
@@ -349,8 +375,14 @@ for nd = 1:length(datasets)
     Y(Y~=1) = -1;
     data = [Y X];
     clear dels Description VarNames X Y z
+  elseif length(findstr('csv', datasets{nd})) > 0
+    data = load(['../ClassificationDatasets/csv/', datasets{nd}]);
+    X = data(:, 1:end-1);
+    Y = data(:, end);
+    X = X(:, std(X)~=0);
+    data = [Y X];
   else
-    load(['data/',datasets{nd},'.mat'])
+    load(['data/', datasets{nd}, '.mat'])
     X = data(:, 2:end);
     Y = data(:, 1);
     X = X(:, std(X)~=0);
@@ -386,8 +418,10 @@ close all;
 
 addpath('ofse/');
 
-datasets = {'a8a', 'german', 'magic04', 'spambase', 'splice', 'svmguide3', ...
-  'sido0', 'ionosphere', 'ovariancancer', 'arrhythmia'};
+datasets = {'a8a', 'german', 'magic04', 'spambase', 'splice', 'svmguide3', ... 
+  'ionosphere', 'ovariancancer', 'arrhythmia', 'sido0',...
+  'miniboone.csv', 'breast-cancer-wisc-diag.csv', 'breast-cancer-wisc-prog.csv', 'chess-krvkp.csv','conn-bench-sonar-mines-rocks.csv',...
+  'connect-4.csv','molec-biol-promoter.csv'};
 % datasets = {'a8a', 'german', 'magic04', 'spambase', 'splice', 'svmguide3', ...
 %   'sido0', 'uni_S10000F500R25', 'uni_S10000F500R50', 'uni_S10000F500R100', ...
 %   'uni_S10000F500R150', 'uni_S10000F500R200'};
@@ -443,6 +477,12 @@ for nd = 1:length(datasets)
     Y(Y~=1) = -1;
     data = [Y X];
     clear dels Description VarNames X Y z
+  elseif length(findstr('csv', datasets{nd})) > 0
+    data = load(['../ClassificationDatasets/csv/', datasets{nd}]);
+    X = data(:, 1:end-1);
+    Y = data(:, end);
+    X = X(:, std(X)~=0);
+    data = [Y X];
   else
     load(['data/', datasets{nd}, '.mat'])
     X = data(:, 2:end);
@@ -479,8 +519,10 @@ close all;
 
 addpath('ofse/');
 
-datasets = {'a8a', 'german', 'magic04', 'spambase', 'splice', 'svmguide3', ...
-  'sido0', 'ionosphere', 'ovariancancer', 'arrhythmia'};
+datasets = {'a8a', 'german', 'magic04', 'spambase', 'splice', 'svmguide3', ... 
+  'ionosphere', 'ovariancancer', 'arrhythmia', 'sido0',...
+  'miniboone.csv', 'breast-cancer-wisc-diag.csv', 'breast-cancer-wisc-prog.csv', 'chess-krvkp.csv','conn-bench-sonar-mines-rocks.csv',...
+  'connect-4.csv','molec-biol-promoter.csv'};
 % datasets = {'a8a', 'german', 'magic04', 'spambase', 'splice', 'svmguide3', ...
 %   'sido0', 'uni_S10000F500R25', 'uni_S10000F500R50', 'uni_S10000F500R100', ...
 %   'uni_S10000F500R150', 'uni_S10000F500R200'};
@@ -535,8 +577,14 @@ for nd = 1:length(datasets)
     Y(Y~=1) = -1;
     data = [Y X];
     clear dels Description VarNames X Y z
+  elseif length(findstr('csv', datasets{nd})) > 0
+    data = load(['../ClassificationDatasets/csv/', datasets{nd}]);
+    X = data(:, 1:end-1);
+    Y = data(:, end);
+    X = X(:, std(X)~=0);
+    data = [Y X];
   else
-    load(['data/',datasets{nd},'.mat'])
+    load(['data/', datasets{nd}, '.mat'])
     X = data(:, 2:end);
     Y = data(:, 1);
     X = X(:, std(X)~=0);
@@ -572,8 +620,10 @@ close all;
 
 addpath('ofse/');
 
-datasets = {'a8a', 'german', 'magic04', 'spambase', 'splice', 'svmguide3', ...
-  'sido0', 'ionosphere', 'ovariancancer', 'arrhythmia'};
+datasets = {'a8a', 'german', 'magic04', 'spambase', 'splice', 'svmguide3', ... 
+  'ionosphere', 'ovariancancer', 'arrhythmia', 'sido0',...
+  'miniboone.csv', 'breast-cancer-wisc-diag.csv', 'breast-cancer-wisc-prog.csv', 'chess-krvkp.csv','conn-bench-sonar-mines-rocks.csv',...
+  'connect-4.csv','molec-biol-promoter.csv'};
 % datasets = {'a8a', 'german', 'magic04', 'spambase', 'splice', 'svmguide3', ...
 %   'sido0', 'uni_S10000F500R25', 'uni_S10000F500R50', 'uni_S10000F500R100', ...
 %   'uni_S10000F500R150', 'uni_S10000F500R200'};
@@ -630,8 +680,14 @@ for nd = 1:length(datasets)
     Y(Y~=1) = -1;
     data = [Y X];
     clear dels Description VarNames X Y z
+  elseif length(findstr('csv', datasets{nd})) > 0
+    data = load(['../ClassificationDatasets/csv/', datasets{nd}]);
+    X = data(:, 1:end-1);
+    Y = data(:, end);
+    X = X(:, std(X)~=0);
+    data = [Y X];
   else
-    load(['data/',datasets{nd},'.mat'])
+    load(['data/', datasets{nd}, '.mat'])
     X = data(:, 2:end);
     Y = data(:, 1);
     X = X(:, std(X)~=0);
@@ -666,8 +722,10 @@ close all;
 
 addpath('ofse/');
 
-datasets = {'a8a', 'german', 'magic04', 'spambase', 'splice', 'svmguide3', ...
-  'sido0', 'ionosphere', 'ovariancancer', 'arrhythmia'};
+datasets = {'a8a', 'german', 'magic04', 'spambase', 'splice', 'svmguide3', ... 
+  'ionosphere', 'ovariancancer', 'arrhythmia', 'sido0',...
+  'miniboone.csv', 'breast-cancer-wisc-diag.csv', 'breast-cancer-wisc-prog.csv', 'chess-krvkp.csv','conn-bench-sonar-mines-rocks.csv',...
+  'connect-4.csv','molec-biol-promoter.csv'};
 % datasets = {'a8a', 'german', 'magic04', 'spambase', 'splice', 'svmguide3', ...
 %   'sido0', 'uni_S10000F500R25', 'uni_S10000F500R50', 'uni_S10000F500R100', ...
 %   'uni_S10000F500R150', 'uni_S10000F500R200'};
@@ -723,8 +781,14 @@ for nd = 1:length(datasets)
     Y(Y~=1) = -1;
     data = [Y X];
     clear dels Description VarNames X Y z
+  elseif length(findstr('csv', datasets{nd})) > 0
+    data = load(['../ClassificationDatasets/csv/', datasets{nd}]);
+    X = data(:, 1:end-1);
+    Y = data(:, end);
+    X = X(:, std(X)~=0);
+    data = [Y X];
   else
-    load(['data/',datasets{nd},'.mat'])
+    load(['data/', datasets{nd}, '.mat'])
     X = data(:, 2:end);
     Y = data(:, 1);
     X = X(:, std(X)~=0);
