@@ -79,6 +79,7 @@ for nd = 1:length(datasets)
     data = load(['../ClassificationDatasets/csv/', datasets{nd}]);
     X = data(:, 1:end-1);
     Y = data(:, end);
+    Y(Y == 0) = -1;
     X = X(:, std(X)~=0);
     data = [Y X];
   else
