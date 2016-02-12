@@ -179,6 +179,7 @@ for nd = 1:length(datasets)
     data = load(['../ClassificationDatasets/csv/', datasets{nd}]);
     X = data(:, 1:end-1);
     Y = data(:, end);
+    Y(Y == 0) = -1;
     X = X(:, std(X)~=0);
     data = [Y X];
   else
@@ -281,6 +282,7 @@ for nd = 1:length(datasets)
     data = load(['../ClassificationDatasets/csv/', datasets{nd}]);
     X = data(:, 1:end-1);
     Y = data(:, end);
+    Y(Y == 0) = -1;
     X = X(:, std(X)~=0);
     data = [Y X];
   else
@@ -380,6 +382,7 @@ for nd = 1:length(datasets)
     data = load(['../ClassificationDatasets/csv/', datasets{nd}]);
     X = data(:, 1:end-1);
     Y = data(:, end);
+    Y(Y == 0) = -1;
     X = X(:, std(X)~=0);
     data = [Y X];
   else
@@ -482,6 +485,7 @@ for nd = 1:length(datasets)
     data = load(['../ClassificationDatasets/csv/', datasets{nd}]);
     X = data(:, 1:end-1);
     Y = data(:, end);
+    Y(Y == 0) = -1;
     X = X(:, std(X)~=0);
     data = [Y X];
   else
@@ -583,6 +587,7 @@ for nd = 1:length(datasets)
     X = data(:, 1:end-1);
     Y = data(:, end);
     X = X(:, std(X)~=0);
+    Y(Y == 0) = -1;
     data = [Y X];
   else
     load(['data/', datasets{nd}, '.mat'])
@@ -685,6 +690,7 @@ for nd = 1:length(datasets)
     data = load(['../ClassificationDatasets/csv/', datasets{nd}]);
     X = data(:, 1:end-1);
     Y = data(:, end);
+    Y(Y == 0) = -1;
     X = X(:, std(X)~=0);
     data = [Y X];
   else
@@ -786,6 +792,7 @@ for nd = 1:length(datasets)
     data = load(['../ClassificationDatasets/csv/', datasets{nd}]);
     X = data(:, 1:end-1);
     Y = data(:, end);
+    Y(Y == 0) = -1;
     X = X(:, std(X)~=0);
     data = [Y X];
   else
