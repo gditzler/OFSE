@@ -111,10 +111,39 @@ for nd = 1:length(datasets)
     
   end
   
-  
-  timers{nd} = 1;
-  
+  for i = 1:9
+    qqq = randperm(length(labels));
+    data = data(qqq,:);
+    data2 = data2(qqq,:);
+    labels2 = labels2(qqq);
+    labels = labels(qqq);
+    
+    for k = 1:length(fracs)
+      opts.frac = fracs(k);
+      opts.truncate = floor(size(data,2)*opts.frac);
 
+      tic;
+      ofs_boosting(data, labels, opts);
+      ts.ofse(k) = ts.ofse(k)+toc;
+
+      tic;
+      feast('mrmr',floor(size(data,2)*opts.frac),data2,labels2);
+      ts.mrmr(k) = ts.mrmr(k)+toc;
+
+      tic;
+      feast('jmi',floor(size(data,2)*opts.frac),data2,labels2);
+      ts.jmi(k) = ts.jmi(k)+toc;
+    
+    end
+  end
+  
+  ts.ofse = ts.ofse/10;
+  ts.mrmr = ts.mrmr/10;
+  ts.jmi = ts.jmi/10;
+  
+  timers{nd} = ts;
+  
+  save('mat/time_experiments.mat');
 end
 save('mat/time_experiments.mat');
 
