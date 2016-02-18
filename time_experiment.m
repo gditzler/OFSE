@@ -1,17 +1,31 @@
+
 clc; 
 clear; 
 close all; 
 
 addpath('ofse/');
-% add paths for the experiments 
 addpath('../thesis-code/feat_sel/FEAST/FEAST/FSToolbox/');
 addpath('../thesis-code/feat_sel/FEAST/FEAST/MIToolbox/');
 addpath('../thesis-code/utils/');
 
-datasets = {'a8a', 'german', 'magic04', 'spambase', 'splice', 'svmguide3', ... 
-  'ionosphere', 'ovariancancer', 'sido0',...
-  'miniboone.csv', 'breast-cancer-wisc-diag.csv', 'breast-cancer-wisc-prog.csv', 'chess-krvkp.csv','conn-bench-sonar-mines-rocks.csv',...
-  'connect-4.csv','molec-biol-promoter.csv', 'parkinsons.csv', 'spect_train.csv'};
+datasets = {'a8a'
+            'german'
+            'magic04'
+            'spambase'
+            'splice'
+            'svmguide3'
+            'ionosphere'
+            'ovariancancer'
+            'sido0'
+            'miniboone.csv'
+            'breast-cancer-wisc-diag.csv'
+            'breast-cancer-wisc-prog.csv'
+            'chess-krvkp.csv'
+            'conn-bench-sonar-mines-rocks.csv'
+            'connect-4.csv'
+            'molec-biol-promoter.csv'
+            'parkinsons.csv'
+            'spect_train.csv'};
 
 timers = {};
 
@@ -76,8 +90,8 @@ for nd = 1:length(datasets)
   data2 = data_binner(data(:, 2:end));
   labels2 = labels;
   labels2(labels2==-1) = 2;
+  data2(isnan(data2)) = 1;
   
-  opts.truncate = floor(size(data,2)*opts.frac);
   
   for k = 1:length(fracs)
     opts.frac = fracs(k);
@@ -88,18 +102,17 @@ for nd = 1:length(datasets)
     ts.ofse(k) = toc;
     
     tic;
-    feast('mrmr',numToSelect,data2,labels2);
+    feast('mrmr',floor(size(data,2)*opts.frac),data2,labels2);
     ts.mrmr(k) = toc;
     
     tic;
-    feast('jmi',numToSelect,data2,labels2);
+    feast('jmi',floor(size(data,2)*opts.frac),data2,labels2);
     ts.jmi(k) = toc;
-    
     
   end
   
   
-  ts{nd} = 1;
+  timers{nd} = 1;
   
 
 end
