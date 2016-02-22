@@ -85,16 +85,16 @@ for nd = 1:length(datasets)
     mistakes_oba(n, nd) =  mistakes(end, end);
   
     disp('  > OFSE-Boo');
-    mistakes = ofs_boosting_avg(data, labels, opts);
-    mistakes_obo(n,nd) = cumsum(mistakes);
+    mistakes = cumsum(ofs_boosting_avg(data, labels, opts));
+    mistakes_obo(n,nd) = mistakes(end, end);
     
     disp('  > OFSE-Bag-R');
-    mistakes = ofs_bagging_randtrunc_avg(data, labels, opts);
-    mistakes_rba(n,nd) = cumsum(mistakes);
+    mistakes = cumsum(ofs_bagging_randtrunc_avg(data, labels, opts));
+    mistakes_rba(n,nd) = mistakes(end, end);
     
     disp('  > OFSE-Boo-R');
-    mistakes = ofs_boosting_randtrunc_avg(data, labels, opts);
-    mistakes_rbo(n,nd) = cumsum(mistakes);
+    mistakes = cumsum(ofs_boosting_randtrunc_avg(data, labels, opts));
+    mistakes_rbo(n,nd) = mistakes(end, end);
   end
 end
 save('mat/B_sensitivity.mat');
