@@ -97,6 +97,6 @@ for nd = 1:length(datasets)
     mistakes_rbo(n,nd) = cumsum(mistakes);
   end
 end
-save('mat/mistakes_experiment_no_anneal.mat');
+save('mat/B_sensitivity.mat');
 
 delete(gcp('nocreate'));
