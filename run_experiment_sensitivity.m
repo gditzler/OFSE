@@ -31,7 +31,7 @@ mistakes_rbo = zeros(length(fracs), length(datasets));
 
 % meant for gail's cluster
 delete(gcp('nocreate'));
-parpool(2);
+parpool(opts.avg);
 
 for nd = 1:length(datasets) 
   disp(['Running: ', datasets{nd}]);
