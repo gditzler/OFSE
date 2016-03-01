@@ -154,7 +154,7 @@ for t = 1:T-1
   % step, and update the number of mistakes made by the ensemble.
   opts.models(:, end) = truncate(new_weights, opts.truncate(end));
   
-  tic;
+  %tic;
   if opts.partial_test
     f_t = opts.models(:, end)'*(data_te(t, :).*mask)';
     if ((f_t)*labels_te(t)) < 0 

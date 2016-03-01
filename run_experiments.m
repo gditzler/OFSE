@@ -20,7 +20,7 @@ addpath('ofse/');
 datasets = {'a8a', 'german', 'magic04', 'spambase', 'splice', 'svmguide3', ... 
   'ionosphere', 'ovariancancer', 'arrhythmia', 'sido0',...
   'miniboone.csv', 'breast-cancer-wisc-diag.csv', 'breast-cancer-wisc-prog.csv', 'chess-krvkp.csv','conn-bench-sonar-mines-rocks.csv',...
-  'connect-4.csv','molec-biol-promoter.csv'};
+  'connect-4.csv','molec-biol-promoter.csv', 'parkinsons.csv', 'spect_train.csv'};
 % datasets = {'a8a', 'german', 'magic04', 'spambase', 'splice', 'svmguide3', ...
 %   'sido0', 'uni_S10000F500R25', 'uni_S10000F500R50', 'uni_S10000F500R100', ...
 %   'uni_S10000F500R150', 'uni_S10000F500R200'};
@@ -47,7 +47,7 @@ timerz_rbo = cell(1, length(datasets));
 
 % meant for gail's cluster
 delete(gcp('nocreate'));
-parpool(15);
+parpool(50);
 
 for nd = 1:length(datasets) 
   disp(['Running: ', datasets{nd}]);
@@ -147,7 +147,7 @@ timerz_rbo = cell(1, length(datasets));
 
 % meant for gail's cluster
 delete(gcp('nocreate'));
-parpool(15);
+parpool(50);
 
 for nd = 1:length(datasets) 
   disp(['Running: ', datasets{nd}]);
@@ -250,7 +250,7 @@ timerz_rbo = cell(1, length(datasets));
 
 % meant for gail's cluster
 delete(gcp('nocreate'));
-parpool(15);
+parpool(50);
 
 for nd = 1:length(datasets) 
   disp(['Running: ', datasets{nd}]);
@@ -350,7 +350,7 @@ timerz_rbo = cell(1, length(datasets));
 
 % meant for gail's cluster
 delete(gcp('nocreate'));
-parpool(15);
+parpool(50);
 
 for nd = 1:length(datasets) 
   disp(['Running: ', datasets{nd}]);
@@ -453,7 +453,7 @@ timerz_rbo = cell(1, length(datasets));
 
 % meant for gail's cluster
 delete(gcp('nocreate'));
-parpool(15);
+parpool(50);
 
 for nd = 1:length(datasets) 
   disp(['Running: ', datasets{nd}]);
@@ -554,7 +554,7 @@ timerz_rbo = cell(1, length(datasets));
 
 % meant for gail's cluster
 delete(gcp('nocreate'));
-parpool(15);
+parpool(50);
 
 for nd = 1:length(datasets) 
   disp(['Running: ', datasets{nd}]);
@@ -658,7 +658,7 @@ timerz_rbo = cell(1, length(datasets));
 
 % meant for gail's cluster
 delete(gcp('nocreate'));
-parpool(15);
+parpool(50);
 
 for nd = 1:length(datasets) 
   disp(['Running: ', datasets{nd}]);
@@ -760,7 +760,7 @@ timerz_rbo = cell(1, length(datasets));
 
 % meant for gail's cluster
 delete(gcp('nocreate'));
-parpool(15);
+parpool(50);
 
 for nd = 1:length(datasets) 
   disp(['Running: ', datasets{nd}]);
